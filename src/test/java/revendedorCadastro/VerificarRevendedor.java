@@ -3,6 +3,9 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+
+import static org.junit.Assert.assertEquals;
+
 import java.lang.Thread.*;
 
 public class VerificarRevendedor {
@@ -17,7 +20,7 @@ public class VerificarRevendedor {
 		driver.findElement(By.className("btn-moura")).click();
 		Thread.sleep(1000);
 		driver.findElement(By.className("btnBuscaRev")).click();
-		//assertEquals("", actual);
+		assertEquals("Cadastro de Revendedor | Promoção Baterias Moura", driver.getTitle());
 	}
 	
 	@Test
