@@ -37,6 +37,19 @@ public class VerificarRevendedor {
 	
 	@Test
 	public void verificaRevendedorNaoCadastradoClickPesquisa() {
+		dsl.clicarBotaoCass("btn-moura");
+		dsl.escrever(By.id("cnpj"), "73043466000148");
+		dsl.clicarBotao("buscar-cnpj");
+		dsl.escrever("nomeFantasia", "Calebe e Geraldo Auto Peças ME");
+		dsl.escrever(id_campo, texto);
+		dsl.escrever(id_campo, texto);
+		dsl.escrever(id_campo, texto);
+		dsl.escrever(id_campo, texto);
+		dsl.escrever(id_campo, texto);
+		dsl.escrever(id_campo, texto);
+		
+		
+		
 		
 		
 	}
