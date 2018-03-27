@@ -30,52 +30,38 @@ public class VerificarRevendedor {
 		dsl = new DSL(driver);
 	}
 	
-	@After
+	/*@After
 	public void finaliza(){
 		driver.quit();
-	}
+	}*/
 	
 	@Test
+	@Ignore
 	public void verificaRevendedorNaoCadastradoClickPesquisa() {
+
+		
+		
+		
+		
+		
+		
+	}
+	
+	
+	@Test
+	public void cadastrandoRevendedor()  {
+		
 		dsl.clicarBotaoCass("btn-moura");
 		dsl.escrever(By.id("cnpj"), "73043466000148");
 		dsl.clicarBotao("buscar-cnpj");
 		dsl.escrever("nomeFantasia", "Calebe e Geraldo Auto Peças ME");
-		dsl.escrever(id_campo, texto);
-		dsl.escrever(id_campo, texto);
-		dsl.escrever(id_campo, texto);
-		dsl.escrever(id_campo, texto);
-		dsl.escrever(id_campo, texto);
-		dsl.escrever(id_campo, texto);
-		
-		
-		
-		
-		
-	}
-	
-	
-	@Test
-	@Ignore
-	@FileParameters(value = "src/test/resources/massa_de_dados.csv",
-		mapper = CsvWithHeaderMapper.class)
-	public void cadastrandoRevendedor() throws InterruptedException {
-		WebDriver driver = new FirefoxDriver();
-		driver.navigate().to("http://server.target1.com.br:9020/revendedor-cadastro.html");
-		dsl.escrever("campocnpj", "03926599000187");
-		Thread.sleep(500);
-		dsl.clicarBotaoCass("btnBuscaRev");
-		dsl.escrever("fantasia", "Enzo e Pietro Telecom ME");
-		
-		//driver.findElement(By.id("campocnpj")).sendKeys("03926599000187");		
-		//driver.findElement(By.className("btnBuscaRev")).click();
-		//driver.findElement(By.id("fantasia")).sendKeys("Enzo e Pietro Telecom ME");
-		driver.findElement(By.id("razao_social")).sendKeys("Enzo e Pietro Telecom ME");
-		driver.findElement(By.id("cadastro_cep")).sendKeys("18050600");
-		driver.findElement(By.id("cadastro_numero")).sendKeys("1014");
-		driver.findElement(By.id("email")).sendKeys("gardenal@gardenal.com.br");
-		driver.findElement(By.id("telefone")).sendKeys("112458-5587");
-		//dsl.selecionarCombo("9", valor);
+		dsl.escrever("razaoSocial", "Calebe e Geraldo Auto Peças ME");
+		dsl.escrever("cep", "12085083");
+		dsl.escrever("numero", "15");
+		dsl.escrever("email", "orcamento@calebeegeraldoautopecas.com.br");
+		dsl.escrever("telefone", "1235809979");
+		dsl.escrever("distribuidorId", "1");
+		dsl.clicarCheck("regulamento");
 		
 		
 		
