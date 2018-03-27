@@ -1,37 +1,49 @@
 package revendedorCadastro;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import junitparams.FileParameters;
 import junitparams.mappers.CsvWithHeaderMapper;
+import qa.bateria.moura.core.DSL;
+
 import static org.junit.Assert.assertEquals;
+
+import org.junit.After;
+import org.junit.Before;
+
 
 
 
 public class VerificarRevendedor {
 	
-	private WebDriver driver;
+	
 	private DSL dsl;
+	private WebDriver driver;
+	
+	@Before
+	public void inicializa(){
+		//System.setProperty("webdriver.gecko.driver", "/home/bcarneiro/SeleniumDriver/geckodriver"); - utilizar no linux
+		driver = new FirefoxDriver();
+		driver.get("http://server.target1.com.br:9020/");
+		dsl = new DSL(driver);
+	}
+	
+	@After
+	public void finaliza(){
+		driver.quit();
+	}
 	
 	@Test
-	@Ignore
-	public void verificaRevendedorNaoCadastradoClickPesquisa() throws InterruptedException {
+	public void verificaRevendedorNaoCadastradoClickPesquisa() {
 		
-		//System.setProperty("webdriver.gecko.driver", "/home/bcarneiro/SeleniumDriver/geckodriver");
-		WebDriver driver = new FirefoxDriver();
-		driver.navigate().to("http://server.target1.com.br:9020/landing-page.html");
-		Thread.sleep(1000);
-		driver.findElement(By.className("btn-moura")).click();
-		Thread.sleep(1000);
-		driver.findElement(By.className("btnBuscaRev")).click();
-		assertEquals("Cadastro de Revendedor | Promoção Baterias Moura", driver.getTitle());
+		
 	}
 	
 	
 	@Test
+	@Ignore
 	@FileParameters(value = "src/test/resources/massa_de_dados.csv",
 		mapper = CsvWithHeaderMapper.class)
 	public void cadastrandoRevendedor() throws InterruptedException {

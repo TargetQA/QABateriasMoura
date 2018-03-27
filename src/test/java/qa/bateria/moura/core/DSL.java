@@ -1,4 +1,4 @@
-package revendedorCadastro;
+package qa.bateria.moura.core;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +20,10 @@ public class DSL {
 	
 	public void escrever(By by, String texto){
 		driver.findElement(by).sendKeys(texto);
+	}
+	
+	public void escreverNaClasse(String nome_classe, String texto) {
+		escrever(By.className(nome_classe), texto);
 	}
 
 	public void escrever(String id_campo, String texto){
