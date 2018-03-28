@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -50,6 +51,10 @@ public class DSL {
 	
 	public boolean isCheckMarcado(String id){
 		return driver.findElement(By.id(id)).isSelected();
+	}
+	
+	public void isCheckMarcadoComEspaco(String id) {		
+		driver.findElement(By.id(id)).sendKeys(Keys.SPACE);
 	}
 	
 	/********* Combo ************/

@@ -2,15 +2,10 @@ package revendedorCadastro;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import junitparams.FileParameters;
-import junitparams.mappers.CsvWithHeaderMapper;
 import qa.bateria.moura.core.DSL;
-
-import static org.junit.Assert.assertEquals;
-
-import org.junit.After;
 import org.junit.Before;
 
 
@@ -50,7 +45,6 @@ public class VerificarRevendedor {
 	
 	@Test
 	public void cadastrandoRevendedor()  {
-		
 		dsl.clicarBotaoCass("btn-moura");
 		dsl.escrever(By.id("cnpj"), "73043466000148");
 		dsl.clicarBotao("buscar-cnpj");
@@ -60,8 +54,8 @@ public class VerificarRevendedor {
 		dsl.escrever("numero", "15");
 		dsl.escrever("email", "orcamento@calebeegeraldoautopecas.com.br");
 		dsl.escrever("telefone", "1235809979");
-		dsl.escrever("distribuidorId", "1");
-		dsl.clicarCheck("regulamento");
+		dsl.isCheckMarcadoComEspaco("regulamento");
+		
 		
 		
 		
