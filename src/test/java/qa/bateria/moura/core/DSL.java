@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,25 +19,33 @@ public class DSL {
 	}
 
 	/********* TextField e TextArea ************/
-	
-	public void escrever(By by, String texto){
-		driver.findElement(by).sendKeys(texto);
-	}
+    
+    public void escrever(By by, String texto){
+        driver.findElement(by).clear();
+        driver.findElement(by).sendKeys(texto);
+    }
+
 	
 	public void escreverNaClasse(String nome_classe, String texto) {
 		escrever(By.className(nome_classe), texto);
 	}
 
-	public void escrever(String id_campo, String texto){
-		escrever(By.id(id_campo), texto);
-	}
-	
-	public String obterValorCampo(String id_campo) {
-		return driver.findElement(By.id(id_campo)).getAttribute("value");
-	}
+    public void escrever(String id_campo, String texto){
+        escrever(By.id(id_campo), texto);
+    }
+    
+    public String obterValorCampo(String id_campo) {
+        return driver.findElement(By.id(id_campo)).getAttribute("value");
+    }
+
 	
 	/********* Radio e Check ************/
-	
+    
+    
+    public void clicarRadio(By by) {
+        driver.findElement(by).click();
+    }
+  	
 	public void clicarRadio(String id) {
 		driver.findElement(By.id(id)).click();
 	}
@@ -107,10 +116,19 @@ public class DSL {
 		return false;
 	}
 	
+	public void selecionarComboPrime(String radical, String valor) {
+		clicarRadio(By.xpath("//*[@id='"+radical+"_input']/../..//span"));
+		clicarRadio(By.xpath("//*[@id='"+radical+"_items']//li[.='"+valor+"']"));
+	}
+	
+	 	
 	/********* Botao ************/
+	public void clicarBotao(By by) {
+		driver.findElement(by).click();
+	}
 	
 	public void clicarBotao(String id) {
-		driver.findElement(By.id(id)).click();
+		clicarBotao(By.id(id));
 	}
 	
 	public void clicarBotaoCass(String classe) {
@@ -120,6 +138,11 @@ public class DSL {
 	public String obterValueElemento(String id) {
 		return driver.findElement(By.id(id)).getAttribute("value");
 	}
+	
+	public void clicarBotaoPorTexto(String texto){
+		clicarBotao(By.xpath("//button[.='"+texto+"']"));
+	}
+	
 	
 	/********* Link ************/
 	
@@ -180,5 +203,59 @@ public class DSL {
 		driver.switchTo().window(id);
 	}
 	
+	/************** JS *********************/
+	
+	public Object executarJS(String cmd, Object... param) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		return js.executeScript(cmd, param);
+	}
+	
+	/************** Tabela *********************/
+	
+	public WebElement obterCelula(String colunaBusca, String valor, String colunaBotao, String idTabela){
+		
+		//procurar coluna do registro
+		WebElement tabela = driver.findElement(By.xpath("//*[@id='"+idTabela+"']"));
+		int idColuna = obterIndiceColuna(colunaBusca, tabela);
+		
+		//encontrar a linha do registro
+		int idLinha = obterIndiceLinha(valor, tabela, idColuna);
+		
+		//procurar coluna do botao
+		int idColunaBotao = obterIndiceColuna(colunaBotao, tabela);
+		
+		//clicar no botao da celula encontrada
+		WebElement celula = tabela.findElement(By.xpath(".//tr["+idLinha+"]/td["+idColunaBotao+"]"));
+		return celula;
+	}
+	
+	public void clicarBotaoTabela(String colunaBusca, String valor, String colunaBotao, String idTabela){
+		WebElement celula = obterCelula(colunaBusca, valor, colunaBotao, idTabela);
+		celula.findElement(By.xpath(".//input")).click();
+		
+	}
 
+	protected int obterIndiceLinha(String valor, WebElement tabela, int idColuna) {
+		List<WebElement> linhas = tabela.findElements(By.xpath("./tbody/tr/td["+idColuna+"]"));
+		int idLinha = -1;
+		for(int i = 0; i < linhas.size(); i++) {
+			if(linhas.get(i).getText().equals(valor)) {
+				idLinha = i+1;
+				break;
+			}
+		}
+		return idLinha;
+	}
+
+	protected int obterIndiceColuna(String coluna, WebElement tabela) {
+		List<WebElement> colunas = tabela.findElements(By.xpath(".//th"));
+		int idColuna = -1;
+		for(int i = 0; i < colunas.size(); i++) {
+			if(colunas.get(i).getText().equals(coluna)) {
+				idColuna = i+1;
+				break;
+			}
+		}
+		return idColuna;
+	}
 }

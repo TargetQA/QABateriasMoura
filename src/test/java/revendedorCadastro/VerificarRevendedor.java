@@ -32,19 +32,13 @@ public class VerificarRevendedor {
 	
 	@Test
 	@Ignore
-	public void verificaRevendedorNaoCadastradoClickPesquisa() {
-
-		
-		
-		
-		
-		
+	public void verificaRevendedorNaoCadastradoClickPesquisa() {		
 		
 	}
 	
 	
 	@Test
-	public void cadastrandoRevendedor()  {
+	public void cadastrandoRevendedorCompleto()  {
 		dsl.clicarBotaoCass("btn-moura");
 		dsl.escrever(By.id("cnpj"), "73043466000148");
 		dsl.clicarBotao("buscar-cnpj");
@@ -54,6 +48,7 @@ public class VerificarRevendedor {
 		dsl.escrever("numero", "15");
 		dsl.escrever("email", "orcamento@calebeegeraldoautopecas.com.br");
 		dsl.escrever("telefone", "1235809979");
+		
 		dsl.isCheckMarcadoComEspaco("regulamento");
 		
 		
