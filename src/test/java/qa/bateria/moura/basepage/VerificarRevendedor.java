@@ -42,7 +42,7 @@ public class VerificarRevendedor {
 		driver.findElement(By.className("swal2-confirm")).click();
 		dsl.escreverId("cnpj", "40916109000198");
 		dsl.clicarBotaoId("buscar-cnpj");
-		Thread.sleep(13000);
+		Thread.sleep(1000);
 		
 		
 	}
