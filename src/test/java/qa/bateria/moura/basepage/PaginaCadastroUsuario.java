@@ -16,7 +16,7 @@ import org.junit.Before;
 
 	
 
-public class PaginaUsuarioCadastro {
+public class PaginaCadastroUsuario {
 	
 
 	private DSL dsl;
@@ -32,9 +32,9 @@ public class PaginaUsuarioCadastro {
 		dsl = new DSL(driver);
 	}
 	
-	@Test  // Verifica os campos obrigatorios de preenchiomento do cadastro
-	       //tenta submeter o formulário fluxo de teste completo dos campos preenchidos
-	
+	 // Verifica os campos obrigatorios de preenchiomento do cadastro
+	 // Tenta submeter o formulário fluxo de teste completo dos campos preenchidos
+	@Test 
 	public void verificaCamposDePreenchimentoVazio() throws InterruptedException{
 		
 		dsl.clicarBotaoClass("btn-moura");
@@ -44,84 +44,81 @@ public class PaginaUsuarioCadastro {
 		dsl.clicarBotaoId("enviar-cadastro-usuario"); //clica no botão enviar campos vazio
 		
 		//campo de preenchimento: nome
-		//Assert.assertEquals("ESTE CAMPO É REQUERIDO.", dsl.obterValorTexto("nome-error"));
 		dsl.checarCampoObrigatorio("ESTE CAMPO É REQUERIDO.", "nome-error");
 		dsl.escreverId("nome", "Giovanni Anthony Santos");
 		dsl.clicarBotaoId("enviar-cadastro-usuario");
 		
 		//campo de preenchimento: cpf
-		Assert.assertEquals("ESTE CAMPO É REQUERIDO.", dsl.obterTexto("cpf-error"));
+		dsl.checarCampoObrigatorio("ESTE CAMPO É REQUERIDO.", "cpf-error");
 		dsl.escreverId("cpf","64501237880");
 		dsl.clicarBotaoId("enviar-cadastro-usuario");
 		
 		// campo de preenchimento: e-mail
-		Assert.assertEquals("ESTE CAMPO É REQUERIDO.", dsl.obterTexto("email-error"));
+		dsl.checarCampoObrigatorio("ESTE CAMPO É REQUERIDO.", "email-error");
 		dsl.escreverId("email", "giovthonysantos@senioraereo.com.br");
 		dsl.clicarBotaoId("enviar-cadastro-usuario");
 				
 		// campo de preenchimento: endereço 
-		Assert.assertEquals("ESTE CAMPO É REQUERIDO.", dsl.obterTexto("endereco-error"));
+		dsl.checarCampoObrigatorio("ESTE CAMPO É REQUERIDO.", "endereco-error");
 		dsl.escreverId("endereco" ,"Rua Maria Angélica Assumpção Cagnani");
 		dsl.clicarBotaoId("enviar-cadastro-usuario");
 				
 		//campo de preenchimento: numero
-		Assert.assertEquals("ESTE CAMPO É REQUERIDO." , dsl.obterTexto("numero-error"));
+		dsl.checarCampoObrigatorio("ESTE CAMPO É REQUERIDO.", "numero-error");
 		dsl.escreverId("numero" , "657");
 		dsl.clicarBotaoId("enviar-cadastro-usuario"); 
 		
 		//campo de preenchimento: bairro
-		//Assert.assertEquals("ESTE CAMPO É REQUERIDO.", dsl.obterTexto("bairro-error"));
 		dsl.checarCampoObrigatorio("ESTE CAMPO É REQUERIDO.", "bairro-error");
 		dsl.escreverId("bairro" , "Jardim Monte Almo");
 		dsl.clicarBotaoId("enviar-cadastro-usuario");
 		
 		//campo de preenchimento: cidade
-		Assert.assertEquals("ESTE CAMPO É REQUERIDO.", dsl.obterTexto("cidade-error"));
+		dsl.checarCampoObrigatorio("ESTE CAMPO É REQUERIDO.", "cidade-error");
 		dsl.escreverId("cidade" , "Poços de Caldas");
-		dsl.clicarBotaoId("enviar-cadastro-usuario"); 
+		dsl.clicarBotaoId("enviar-cadastro-usuario");  
 		
 		//campo de preenchimento: estado
-		Assert.assertEquals("ESTE CAMPO É REQUERIDO.", dsl.obterTexto("estado-error"));
-		new Select(driver.findElement(By.id("estado")))
-		.selectByVisibleText("Minas Gerais");
+		dsl.checarCampoObrigatorio("ESTE CAMPO É REQUERIDO.", "estado-error");
+		dsl.selecionarComboPorVisibleText("estado", "Minas Gerais");
 		dsl.clicarBotaoId("enviar-cadastro-usuario");		
 		
 		//campo de preenchimento: CEP (automático)
-		Assert.assertEquals("ESTE CAMPO É REQUERIDO.", dsl.obterTexto("cep-error"));
+		dsl.checarCampoObrigatorio("ESTE CAMPO É REQUERIDO.", "cep-error");
 		dsl.escreverId("cep" ,"37704022");
 		dsl.clicarBotaoId("enviar-cadastro-usuario");
-		Thread.sleep(3000);
+		Thread.sleep(1000);
 
 		//campo de preenchimento: celular
-		Assert.assertEquals("ESTE CAMPO É REQUERIDO.", dsl.obterTexto("celular-error"));
+		dsl.checarCampoObrigatorio("ESTE CAMPO É REQUERIDO.", "celular-error");
 		dsl.escreverId("celular" , "35995552566");
 		dsl.clicarBotaoId("enviar-cadastro-usuario"); 
 				
 		//campo de preenchimento: sexo
-		Assert.assertEquals("ESTE CAMPO É REQUERIDO.", dsl.obterTexto("sexo-error"));
-		new Select(driver.findElement(By.id("sexo")))
-		.selectByVisibleText("Masculino");
+		dsl.checarCampoObrigatorio("ESTE CAMPO É REQUERIDO." , "sexo-error");
+		dsl.selecionarComboPorVisibleText("sexo", "Masculino");
 		dsl.clicarBotaoId("enviar-cadastro-usuario"); 
 		
 		//campo de preenchimento: data de nascimento
-		Assert.assertEquals("ESTE CAMPO É REQUERIDO.", dsl.obterTexto("dataNascimento-error"));
+		dsl.checarCampoObrigatorio("ESTE CAMPO É REQUERIDO.", "dataNascimento-error");
 		dsl.escreverId("dataNascimento" , "16031988");
 		dsl.clicarBotaoId("enviar-cadastro-usuario"); 
 		
 		//campo de preenchimento: senha
-		Assert.assertEquals("ESTE CAMPO É REQUERIDO.", dsl.obterTexto("senha-error"));
+		dsl.checarCampoObrigatorio("ESTE CAMPO É REQUERIDO.", "senha-error");
 		dsl.escreverId("senha" , "123456");
 		dsl.clicarBotaoId("enviar-cadastro-usuario"); 
 		
 		//campo de preenchimento: seleciona cargo
-		Assert.assertEquals("ESTE CAMPO É REQUERIDO.", dsl.obterTexto("cargo-error"));
+		dsl.checarCampoObrigatorio("ESTE CAMPO É REQUERIDO.", "cargo-error");
 		dsl.clicarRadioId("cargoId1");
 		dsl.clicarBotaoId("enviar-cadastro-usuario");
 				
 		//campo de preenchimento: clica regulamento
-		Assert.assertEquals("ESTE CAMPO É REQUERIDO.", dsl.obterTexto("regulamento-error"));
-		dsl.clicarCheckId("regulamento");
-		//ao clicar, deve cadastrar com sucesso
+		dsl.checarCampoObrigatorio("ESTE CAMPO É REQUERIDO.", "regulamento-error");
+		dsl.clicarCheckId("regulamento");		
+		
+		//ao clicar, deve cadastrar com sucesso [manter ainda como comentário]
 		//dsl.clicarBotaoId("enviar-cadastro-usuario");
 			
 		

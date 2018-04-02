@@ -32,16 +32,13 @@ public class DSL {
 		escrever(By.className(nome_classe), texto);
 	}
 
-	//modificado por lucas : escreverId
-    public void escreverId(String id_campo, String texto){
+	public void escreverId(String id_campo, String texto){
         escrever(By.id(id_campo), texto);
     }
     
     public String obterValorCampo(String id_campo) {
         return driver.findElement(By.id(id_campo)).getAttribute("value");
     }
-    
-    //Criado por Lucas - Verifica o texto  (sei que por texto não é o indicado)
     
     public String obterValorTexto(String id_campo) {
     	
@@ -62,7 +59,7 @@ public class DSL {
         driver.findElement(by).click();
     }
   	
-    //alterado por lucas RadioId
+    
 	public void clicarRadioId(String id) {
 		driver.findElement(By.id(id)).click();
 	}
@@ -71,7 +68,7 @@ public class DSL {
 		return driver.findElement(By.id(id)).isSelected();
 	}
 	
-	//alterado por lucas CkechId
+	
 	public void clicarCheckId(String id) {
 		driver.findElement(By.id(id)).click();
 	}
@@ -139,7 +136,15 @@ public class DSL {
 		clicarRadio(By.xpath("//*[@id='"+radical+"_items']//li[.='"+valor+"']"));
 	}
 	
-	 	
+	// lucas
+	public void selecionarComboPorVisibleText(String id_campo , String texto) {
+		
+		new Select(driver.findElement(By.id(id_campo)))
+		.selectByVisibleText(texto);
+		 	
+		
+	}
+	
 	/********* Botao ************/
 	public void clicarBotaoBy(By by) {
 		driver.findElement(by).click();

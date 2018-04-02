@@ -42,7 +42,7 @@ public class PaginaCadastroRevendedor {
 		driver.findElement(By.className("swal2-confirm")).click();
 		dsl.escreverId("cnpj", "40916109000198");
 		dsl.clicarBotaoId("buscar-cnpj");
-		Thread.sleep(13000);
+		Thread.sleep(1000);
 		
 		
 	}
@@ -54,7 +54,7 @@ public class PaginaCadastroRevendedor {
 		dsl.clicarBotaoClass("btn-moura");
 		dsl.escreverId("cnpj", "40916109000198");
 		dsl.clicarBotaoId("buscar-cnpj");
-		Thread.sleep(13000);
+		Thread.sleep(1000);
 		dsl.escreverId("nomeFantasia", "Analu e Helena Adega ME");
 		dsl.escreverId("razaoSocial", "Analu e Helena Adega ME");
 		dsl.escreverId("cep", "12085083");
