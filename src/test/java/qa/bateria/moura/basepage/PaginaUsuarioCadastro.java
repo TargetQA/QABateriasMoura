@@ -1,4 +1,4 @@
-package revendedorCadastro;
+package qa.bateria.moura.basepage;
 
 import org.junit.Ignore;
 import org.junit.Test;
