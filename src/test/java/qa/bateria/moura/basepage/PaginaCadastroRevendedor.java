@@ -15,7 +15,7 @@ import org.junit.Before;
 
 
 
-public class VerificarRevendedor {
+public class PaginaCadastroRevendedor {
 	
 	
 	private DSL dsl;
