@@ -44,7 +44,8 @@ public class PaginaUsuarioCadastro {
 		dsl.clicarBotaoId("enviar-cadastro-usuario"); //clica no botão enviar campos vazio
 		
 		//campo de preenchimento: nome
-		Assert.assertEquals("ESTE CAMPO É REQUERIDO.", dsl.obterValorTexto("nome-error"));
+		//Assert.assertEquals("ESTE CAMPO É REQUERIDO.", dsl.obterValorTexto("nome-error"));
+		dsl.checarCampoObrigatorio("ESTE CAMPO É REQUERIDO.", "nome-error");
 		dsl.escreverId("nome", "Giovanni Anthony Santos");
 		dsl.clicarBotaoId("enviar-cadastro-usuario");
 		
@@ -66,10 +67,11 @@ public class PaginaUsuarioCadastro {
 		//campo de preenchimento: numero
 		Assert.assertEquals("ESTE CAMPO É REQUERIDO." , dsl.obterTexto("numero-error"));
 		dsl.escreverId("numero" , "657");
-		dsl.clicarBotaoId("enviar-cadastro-usuario");
+		dsl.clicarBotaoId("enviar-cadastro-usuario"); 
 		
 		//campo de preenchimento: bairro
-		Assert.assertEquals("ESTE CAMPO É REQUERIDO.", dsl.obterTexto("bairro-error"));
+		//Assert.assertEquals("ESTE CAMPO É REQUERIDO.", dsl.obterTexto("bairro-error"));
+		dsl.checarCampoObrigatorio("ESTE CAMPO É REQUERIDO.", "bairro-error");
 		dsl.escreverId("bairro" , "Jardim Monte Almo");
 		dsl.clicarBotaoId("enviar-cadastro-usuario");
 		

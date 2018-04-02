@@ -49,6 +49,10 @@ public class DSL {
     	
     }
     
+    public void checarCampoObrigatorio (String texto, String id_campo) {
+    	Assert.assertEquals(texto, obterTexto(id_campo));
+    }
+    
    
 	
 	/********* Radio e Check ************/
