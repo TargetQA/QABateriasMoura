@@ -44,7 +44,8 @@ public class PaginaUsuarioCadastro {
 		dsl.clicarBotaoId("enviar-cadastro-usuario"); //clica no botão enviar campos vazio
 		
 		//campo de preenchimento: nome
-		Assert.assertEquals("ESTE CAMPO É REQUERIDO.", dsl.obterValorTexto("nome-error"));
+		//Assert.assertEquals("ESTE CAMPO É REQUERIDO.", dsl.obterValorTexto("nome-error"));
+		dsl.checarCampoObrigatorio("ESTE CAMPO É REQUERIDO.", "nome-error");
 		dsl.escreverId("nome", "Giovanni Anthony Santos");
 		dsl.clicarBotaoId("enviar-cadastro-usuario");
 		
