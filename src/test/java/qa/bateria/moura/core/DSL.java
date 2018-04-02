@@ -2,6 +2,7 @@ package qa.bateria.moura.core;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -18,6 +19,7 @@ public class DSL {
 		this.driver = driver;
 	}
 
+	
 	/********* TextField e TextArea ************/
     
     public void escrever(By by, String texto){
@@ -30,14 +32,24 @@ public class DSL {
 		escrever(By.className(nome_classe), texto);
 	}
 
-    public void escrever(String id_campo, String texto){
+	//modificado por lucas : escreverId
+    public void escreverId(String id_campo, String texto){
         escrever(By.id(id_campo), texto);
     }
     
     public String obterValorCampo(String id_campo) {
         return driver.findElement(By.id(id_campo)).getAttribute("value");
     }
-
+    
+    //Criado por Lucas - Verifica o texto  (sei que por texto não é o indicado)
+    
+    public String obterValorTexto(String id_campo) {
+    	
+    	return driver.findElement(By.id(id_campo)).getText();
+    	
+    }
+    
+   
 	
 	/********* Radio e Check ************/
     
@@ -46,7 +58,8 @@ public class DSL {
         driver.findElement(by).click();
     }
   	
-	public void clicarRadio(String id) {
+    //alterado por lucas RadioId
+	public void clicarRadioId(String id) {
 		driver.findElement(By.id(id)).click();
 	}
 	
@@ -54,7 +67,8 @@ public class DSL {
 		return driver.findElement(By.id(id)).isSelected();
 	}
 	
-	public void clicarCheck(String id) {
+	//alterado por lucas CkechId
+	public void clicarCheckId(String id) {
 		driver.findElement(By.id(id)).click();
 	}
 	
@@ -123,15 +137,15 @@ public class DSL {
 	
 	 	
 	/********* Botao ************/
-	public void clicarBotao(By by) {
+	public void clicarBotaoBy(By by) {
 		driver.findElement(by).click();
 	}
 	
-	public void clicarBotao(String id) {
-		clicarBotao(By.id(id));
+	public void clicarBotaoId(String id) {
+		clicarBotaoBy(By.id(id));
 	}
 	
-	public void clicarBotaoCass(String classe) {
+	public void clicarBotaoClass(String classe) {
 		driver.findElement(By.className(classe)).click();
 	}
 	
@@ -140,7 +154,7 @@ public class DSL {
 	}
 	
 	public void clicarBotaoPorTexto(String texto){
-		clicarBotao(By.xpath("//button[.='"+texto+"']"));
+		clicarBotaoBy(By.xpath("//button[.='"+texto+"']"));
 	}
 	
 	

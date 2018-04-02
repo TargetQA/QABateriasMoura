@@ -2,10 +2,14 @@ package revendedorCadastro;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+
 import qa.bateria.moura.core.DSL;
+
+import org.junit.Assert;
 import org.junit.Before;
 
 
@@ -18,39 +22,49 @@ public class VerificarRevendedor {
 	private WebDriver driver;
 	
 	@Before
-	public void inicializa(){
+	public void inicializa() throws InterruptedException{
 		//System.setProperty("webdriver.gecko.driver", "/home/bcarneiro/SeleniumDriver/geckodriver"); - utilizar no linux
-		driver = new FirefoxDriver();
-		driver.get("http://server.target1.com.br:9020/");
+		//driver = new FirefoxDriver();
+		driver = new ChromeDriver();
+		driver.get("http://server.target1.com.br:9020/#/portal/home");
+		Thread.sleep(500);
 		dsl = new DSL(driver);
 	}
 	
-	/*@After
-	public void finaliza(){
-		driver.quit();
-	}*/
 	
 	@Test
-	@Ignore
-	public void verificaRevendedorNaoCadastradoClickPesquisa() {		
+	public void pesquisaRevendedor() throws InterruptedException  {		
+		
+		dsl.clicarBotaoClass("btn-moura");
+		dsl.clicarBotaoId("buscar-cnpj");
+		String texto = driver.findElement(By.className("swal2-content")).getText();
+		Assert.assertEquals("Digite um CNPJ Válido para continuar", texto);
+		driver.findElement(By.className("swal2-confirm")).click();
+		dsl.escreverId("cnpj", "40916109000198");
+		dsl.clicarBotaoId("buscar-cnpj");
+		Thread.sleep(13000);
+		
 		
 	}
 	
 	
 	@Test
-	public void cadastrandoRevendedorCompleto()  {
-		dsl.clicarBotaoCass("btn-moura");
-		dsl.escrever(By.id("cnpj"), "73043466000148");
-		dsl.clicarBotao("buscar-cnpj");
-		dsl.escrever("nomeFantasia", "Calebe e Geraldo Auto Peças ME");
-		dsl.escrever("razaoSocial", "Calebe e Geraldo Auto Peças ME");
-		dsl.escrever("cep", "12085083");
-		dsl.escrever("numero", "15");
-		dsl.escrever("email", "orcamento@calebeegeraldoautopecas.com.br");
-		dsl.escrever("telefone", "1235809979");
+	public void cadastrandoRevendedorCompleto() throws InterruptedException  {
 		
+		dsl.clicarBotaoClass("btn-moura");
+		dsl.escreverId("cnpj", "40916109000198");
+		dsl.clicarBotaoId("buscar-cnpj");
+		Thread.sleep(13000);
+		dsl.escreverId("nomeFantasia", "Analu e Helena Adega ME");
+		dsl.escreverId("razaoSocial", "Analu e Helena Adega ME");
+		dsl.escreverId("cep", "12085083");
+		dsl.escreverId("numero", "15");
+		dsl.escreverId("email", "orcamento@calebeegeraldoautopecas.com.br");
+		dsl.escreverId("telefone", "1235809979");
+		dsl.clicarBotaoClass("selection");
+	//	new Select(driver.findElement(By.className("selection")))
+	//	.selectByVisibleText("Autobate Matriz");
 		dsl.isCheckMarcadoComEspaco("regulamento");
-		
 		
 		
 		
