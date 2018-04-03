@@ -140,7 +140,7 @@ public class DSL {
 	public void selecionarComboPorVisibleText(String id_campo , String texto) {
 		
 		new Select(driver.findElement(By.id(id_campo)))
-		.selectByVisibleText(texto);
+			.selectByVisibleText(texto);
 		 	
 		
 	}
