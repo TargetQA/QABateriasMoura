@@ -293,6 +293,14 @@ public class DSL {
 		clicarRadio(By.xpath("//*[@id='"+radical+"_items']//li[.='"+valor+"']"));
 	}
 	
+	public void selecionarComboPorVisibleText(String id_campo, String texto)
+    {
+
+        new Select(driver.findElement(By.id(id_campo)))
+        .selectByVisibleText(texto);
+
+    }
+	
 		
 	/********* Botao ************/
 	
