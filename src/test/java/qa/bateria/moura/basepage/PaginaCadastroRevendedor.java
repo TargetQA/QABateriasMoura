@@ -2,12 +2,16 @@ package qa.bateria.moura.basepage;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.Select;
+
+import com.sun.org.apache.bcel.internal.generic.Select;
 
 import qa.bateria.moura.core.DSL;
+
+import java.awt.event.FocusAdapter;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -25,14 +29,21 @@ public class PaginaCadastroRevendedor {
 	public void inicializa() throws InterruptedException{
 		//System.setProperty("webdriver.gecko.driver", "/home/bcarneiro/SeleniumDriver/geckodriver"); - utilizar no linux
 		//driver = new FirefoxDriver();
-		driver = new ChromeDriver();
+		driver = new FirefoxDriver();
 		driver.get("http://server.target1.com.br:9020/#/portal/home");
 		Thread.sleep(500);
 		dsl = new DSL(driver);
 	}
 	
+	/* @After
+	public void finaliza(){
+		driver.quit();
+	}*/
+	
+
 	
 	@Test
+	@Ignore
 	public void pesquisaRevendedor() throws InterruptedException  {		
 		
 		dsl.clicarBotaoClass("btn-moura");
@@ -40,7 +51,7 @@ public class PaginaCadastroRevendedor {
 		String texto = driver.findElement(By.className("swal2-content")).getText();
 		Assert.assertEquals("Digite um CNPJ Válido para continuar", texto);
 		driver.findElement(By.className("swal2-confirm")).click();
-		dsl.escreverId("cnpj", "40916109000198");
+		dsl.escreverId("cnpj", dsl.gerarcnpj(false));
 		dsl.clicarBotaoId("buscar-cnpj");
 		Thread.sleep(1000);
 		
@@ -52,24 +63,17 @@ public class PaginaCadastroRevendedor {
 	public void cadastrandoRevendedorCompleto() throws InterruptedException  {
 		
 		dsl.clicarBotaoClass("btn-moura");
-		dsl.escreverId("cnpj", "40916109000198");
+		dsl.escreverId("cnpj", dsl.gerarcnpj(false));
 		dsl.clicarBotaoId("buscar-cnpj");
-		Thread.sleep(1000);
-		dsl.escreverId("nomeFantasia", "Analu e Helena Adega ME");
-		dsl.escreverId("razaoSocial", "Analu e Helena Adega ME");
-		dsl.escreverId("cep", "12085083");
-		dsl.escreverId("numero", "15");
-		dsl.escreverId("email", "orcamento@calebeegeraldoautopecas.com.br");
-		dsl.escreverId("telefone", "1235809979");
-		dsl.clicarBotaoClass("selection");
-	//	new Select(driver.findElement(By.className("selection")))
-	//	.selectByVisibleText("Autobate Matriz");
-		dsl.isCheckMarcadoComEspaco("regulamento");
-		
-		
-		
-		
-		
+		Thread.sleep(500);
+		dsl.escreverId("nomeFantasia", dsl.geraEmpresaAleatorio());
+		dsl.escreverId("razaoSocial", dsl.geraEmpresaAleatorio());
+		dsl.escreverId("cep", "04456140");
+		dsl.escreverId("numero", "17");
+		dsl.escreverId("email", dsl.geraEmailAleatorio());
+		dsl.escreverId("telefone", "1235809975");
+		dsl.selecionarComboAjax("select2-hidden-accessible", "Baterias Moura");	
+		dsl.isCheckMarcadoComEspaco("regulamento");		
 		
 	}
 

@@ -1,16 +1,8 @@
 package qa.bateria.moura.basepage;
-
-import org.junit.Ignore;
 import org.junit.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.Select;
-
 import qa.bateria.moura.core.DSL;
-
-import org.junit.Assert;
 import org.junit.Before;
 
 
@@ -38,19 +30,19 @@ public class PaginaCadastroUsuario {
 	public void verificaCamposDePreenchimentoVazio() throws InterruptedException{
 		
 		dsl.clicarBotaoClass("btn-moura");
-		dsl.escreverId("cnpj", "40916109000198");
+		dsl.escreverId("cnpj", dsl.gerarcnpj(false));
 		dsl.clicarBotaoId("buscar-cnpj");
 		Thread.sleep(10000);
 		dsl.clicarBotaoId("enviar-cadastro-usuario"); //clica no botão enviar campos vazio
 		
 		//campo de preenchimento: nome
 		dsl.checarCampoObrigatorio("ESTE CAMPO É REQUERIDO.", "nome-error");
-		dsl.escreverId("nome", "Giovanni Anthony Santos");
+		dsl.escreverId("nome", dsl.geraNomeAleatorio());
 		dsl.clicarBotaoId("enviar-cadastro-usuario");
 		
 		//campo de preenchimento: cpf
 		dsl.checarCampoObrigatorio("ESTE CAMPO É REQUERIDO.", "cpf-error");
-		dsl.escreverId("cpf","64501237880");
+		dsl.escreverId("cpf", dsl.geracpf(false));
 		dsl.clicarBotaoId("enviar-cadastro-usuario");
 		
 		// campo de preenchimento: e-mail
