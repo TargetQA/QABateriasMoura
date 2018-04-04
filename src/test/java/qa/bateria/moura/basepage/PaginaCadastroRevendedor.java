@@ -10,6 +10,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import com.sun.org.apache.bcel.internal.generic.Select;
 
 import qa.bateria.moura.core.DSL;
+
+import java.awt.event.FocusAdapter;
+
 import org.junit.Assert;
 import org.junit.Before;
 
@@ -67,18 +70,10 @@ public class PaginaCadastroRevendedor {
 		dsl.escreverId("razaoSocial", dsl.geraEmpresaAleatorio());
 		dsl.escreverId("cep", "04456140");
 		dsl.escreverId("numero", "17");
-		dsl.escreverId("email", "orcamento@calebeegeraldoautopeca.com.br");
+		dsl.escreverId("email", dsl.geraEmailAleatorio());
 		dsl.escreverId("telefone", "1235809975");
-		WebElement combo = driver.findElement(By.className("select2-selection--single"));
-		combo.sendKeys(Keys.SPACE);
-		
-
-		dsl.isCheckMarcadoComEspaco("regulamento");
-		
-		
-		
-		
-		
+		dsl.selecionarComboAjax("select2-hidden-accessible", "Baterias Moura");	
+		dsl.isCheckMarcadoComEspaco("regulamento");		
 		
 	}
 

@@ -10,6 +10,9 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+
+
+
 import java.util.Random;
 
 public class DSL {
@@ -30,7 +33,7 @@ public class DSL {
 	}
 
 	
-	/********* CNPJ, CPF, Pessoa e Empresa ************/
+	/********* CNPJ, CPF, Pessoa, Empresa e E-mail ************/
 	
 	public String geracpf(boolean comPontos) {
 		int n = 9;
@@ -129,23 +132,40 @@ public class DSL {
 	
 	public String geraEmpresaAleatorio()
     {
-        String[] nomes = { "A Rates", "Integrid", "Sun", "J & J", "Grill", "Grafic", "TOP GUN", "Balon Balon", "Destiny", "The Angels", "Quantum", "Place", "Unconventional", "Metro", "Samurai", "Simpson", "Natanael", "Wall", "Orlando", "Street", "Gildo", "Coca", "MicroL", "Jurask", "UMO", "ARDIDAS", "WeDoLogos", "CaraLivro", "Juvenal", "DEMINU" };
+        String[] nomes = { "atendimento","contato", "orcamento", "despesa", "RH", "dp", "recursos.humanos", "deposito", "gerente", "gestor", "diretoria", "almoxarifado", "balconista"};
         String[] sobrenomes = { "Auto", "Lar", "Seco", "Vieira", "Mendes", "Miyahira", "Garcia", "Cunha", "Santos", "Flávio" };
         String[] ultimoNome = { "LTDA", "ME", "EIRELI", "S/A", "EPP" };
 
-        StringBuilder nomeAleatorio = new StringBuilder();
+        StringBuilder empresaAleatorio = new StringBuilder();
 
-        nomeAleatorio.append(nomes[new Random().nextInt(29)])
+        empresaAleatorio.append(nomes[new Random().nextInt(13)])
                      .append(" ")
                      .append(sobrenomes[new Random().nextInt(9)])
-                     .append(" de ")
+                     .append(" ")
                      .append(ultimoNome[new Random().nextInt(5)])
                      .append(" ")
                      .append(this.hashCode());
 
-        return nomeAleatorio.toString();
+        return empresaAleatorio.toString();
     }
 	
+	public String geraEmailAleatorio()
+    {
+        String[] nomes = { "A Rates", "Integrid", "Sun", "J & J", "Grill", "Grafic", "TOP GUN", "Balon Balon", "Destiny", "The Angels", "Quantum", "Place", "Unconventional", "Metro", "Samurai", "Simpson", "Natanael", "Wall", "Orlando", "Street", "Gildo", "Coca", "MicroL", "Jurask", "UMO", "ARDIDAS", "WeDoLogos", "CaraLivro", "Juvenal", "DEMINU" };
+        String[] arroba = {"@"} ;
+        String[] ultimoNome = { "Auto", "Lar", "Seco", "Vieira", "Mendes", "Miyahira", "Garcia", "Cunha", "Santos", "Flávio", "LTDA", "ME", "EIRELI", "S/A", "EPP" };
+        String[] complemento = {".com.br"};
+
+        StringBuilder emailAleatorio = new StringBuilder();
+
+        emailAleatorio.append(nomes[new Random().nextInt(29)])
+                      .append(arroba[new Random().nextInt(1)])
+                      .append(ultimoNome[new Random().nextInt(5)])
+                      .append(complemento[new Random().nextInt(1)]);
+                      
+
+        return emailAleatorio.toString();
+    }
 	
 	
 	/********* TextField e TextArea ************/
@@ -211,6 +231,15 @@ public class DSL {
 	
 	/********* Combo ************/
 	
+	public void selecionarComboAjax (String class_campo, String texto) {
+		
+		WebElement combo = driver.findElement(By.className(class_campo));
+		combo.sendKeys(Keys.SPACE);
+		combo.findElement(By.tagName(texto)).submit();
+		
+		
+	}
+	
 	public void selecionarCombo(String id, String valor) {
 		WebElement element = driver.findElement(By.id(id));
 		Select combo = new Select(element);
@@ -274,6 +303,7 @@ public class DSL {
 	}
 	
 	/********* Botao ************/
+	
 	public void clicarBotaoBy(By by) {
 		driver.findElement(by).click();
 	}
